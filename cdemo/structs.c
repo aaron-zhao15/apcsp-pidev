@@ -4,8 +4,8 @@
 struct Student {
 	char firstName[20];
 	char lastName[20];
-	int age;
-	int studentID;
+	char age[1];
+	char studentID[1];
 };
 
 void printStudent(struct Student* student) {
@@ -17,29 +17,47 @@ void printStudent(struct Student* student) {
 
 
 int main() {
-	arr students[];
 
-	struct Student newStudent;
+	struct Student students[256];
+	char done[4] = "done";
+	char checkDone[4];
+	int index = 0;
 
 	while (1) {
-	  addStudent();
-	  char input[256]; 
 
-        printf("Input student first name: \n");
+	  struct Student newStudent;
 
-        strcat(student.firstName, fgets(input, 256, stdin));
+	  char input[256];
 
-        printf("Input student last name: \n");
+	  printf("Input student first name: \n");
+	  fgets(input, 256, stdin);
+	  strcat(newStudent.firstName, input);
 
-        strcat(student.lastName, fgets(input, 256, stdin));
+	  printf("Input student last name: \n");
+	  fgets(input, 256, stdin);
+	  strcat(newStudent.lastName, input);
 
-        printf("Input student age: \n");
+	  printf("Input student age: \n");
+	  fgets(input, 256, stdin);
+	  strcat(newStudent.age, input);
 
-        student.age = fgets(input, 256, stdin);
+	  printf("Input student ID: \n");
+	  fgets(input, 256, stdin);
+	  strcat(newStudent.studentID, input);
 
-        printf("Input student ID: \n");
+	  printf("If you are done, type 'done'. If not, press enter.\n");
+	  fgets(checkDone, 4, stdin);
 
-        student.studentID = fgets(input, 256, stdin);
+	    if(strcmp(checkDone, done) == 1) {
+		continue;
+	    }
 
-  }
+	  students[index] = newStudent;
+	  index++;
+
+	}
+
+	for (int i = 0; i >= index; i++) {
+	  printStudent(&students[i]);
+	}
 }
