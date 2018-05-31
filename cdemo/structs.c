@@ -4,8 +4,8 @@
 struct Student {
 	char firstName[20];
 	char lastName[20];
-	char age[1];
-	char studentID[1];
+	int age;
+	int studentID;
 };
 
 void printStudent(struct Student* student) {
@@ -13,51 +13,48 @@ void printStudent(struct Student* student) {
 	printf("Last Name: %s\n", student->lastName);
 	printf("Age: %d\n", student->age);
 	printf("Student ID: %d\n", student->studentID);
+	printf("\n");
 }
 
 
 int main() {
 
 	struct Student students[256];
-	char done[4] = "done";
-	char checkDone[4];
+	char checkDone[10];
 	int index = 0;
 
 	while (1) {
-
-	  struct Student newStudent;
 
 	  char input[256];
 
 	  printf("Input student first name: \n");
 	  fgets(input, 256, stdin);
-	  strcat(newStudent.firstName, input);
+	  sscanf(input, "%s", students[index].firstName);
 
 	  printf("Input student last name: \n");
 	  fgets(input, 256, stdin);
-	  strcat(newStudent.lastName, input);
+	  sscanf(input, "%s", students[index].lastName);
 
 	  printf("Input student age: \n");
 	  fgets(input, 256, stdin);
-	  strcat(newStudent.age, input);
+	  sscanf(input, "%d", &students[index].age);
 
 	  printf("Input student ID: \n");
 	  fgets(input, 256, stdin);
-	  strcat(newStudent.studentID, input);
+	  sscanf(input, "%d", &students[index].studentID);
 
-	  printf("If you are done, type 'done'. If not, press enter.\n");
-	  fgets(checkDone, 4, stdin);
-
-	    if(strcmp(checkDone, done) == 1) {
-		continue;
-	    }
-
-	  students[index] = newStudent;
 	  index++;
 
+	  printf("If you are done, type 'done'. If not, press enter.\n");
+	  fgets(input, 256, stdin);
+	  sscanf(input, "%s", checkDone);
+
+	    if(strcmp(checkDone, "done") == 0) break;
+
 	}
 
-	for (int i = 0; i >= index; i++) {
+	for (int i = 0; i < index; i++) {
 	  printStudent(&students[i]);
 	}
+
 }
